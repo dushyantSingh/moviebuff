@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class MainCoordinator {
     var mainNavigationController: UINavigationController!
     let viewModelCoordinator = MovieViewModelCoordinator()
     
+    private let disposeBag = DisposeBag()
     init() {
         startApplication()
+        setupNavigationAction()
     }
+    
+    private func setupNavigationAction() {
+        viewModelCoordinator.navigationAction
+            .subscribe(onNext: {
+                let vc = self.getViewControllerFor(viewModel: $0)
+                self.mainNavigationController.pushViewController(vc, animated: true)})
+        .disposed(by: disposeBag)
+    }
+    
     private func startApplication() {
         let viewModel = viewModelCoordinator.setupStartViewModel()
         let viewController = getViewControllerFor(viewModel: viewModel)
@@ -28,7 +41,7 @@ class MainCoordinator {
             vc.viewModel = viewModel
             return vc
         case let viewModel as AllMovieViewModel:
-            let vc = UIViewController.make(viewController: AllMoviesViewController.self)
+            let vc = UIViewController.make(viewController: AllMovieViewController.self)
             vc.viewModel = viewModel
             return vc
         default:

@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class AllMoviesViewController: UIViewController, ViewControllerProtocol {
+class AllMovieViewController: UIViewController, ViewControllerProtocol {
     typealias ViewModelT = AllMovieViewModel
     var viewModel: AllMovieViewModel!
     
 }
 
-extension AllMoviesViewController: UITableViewDataSource {
+extension AllMovieViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.movieList.count
     }

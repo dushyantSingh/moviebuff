@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4456C7FF22DB664300334D30 /* AllMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C7FE22DB664300334D30 /* AllMoviesViewController.swift */; };
+		4456C7FF22DB664300334D30 /* AllMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C7FE22DB664300334D30 /* AllMovieViewController.swift */; };
 		4456C80122DB665200334D30 /* AllMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80022DB665200334D30 /* AllMovieViewModel.swift */; };
 		4456C80322DB666600334D30 /* AllMovieViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4456C80222DB666600334D30 /* AllMovieViewController.storyboard */; };
 		4456C80722DB6ADE00334D30 /* MovieViewModelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80622DB6ADE00334D30 /* MovieViewModelCoordinator.swift */; };
@@ -46,7 +46,7 @@
 		03C4857B693E89772AD6640F /* Pods_MoviebuffUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviebuffUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04957C2F99E8B22EDE025D68 /* Pods-MoviebuffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviebuffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests.release.xcconfig"; sourceTree = "<group>"; };
 		080A22A7880108593D486AEE /* Pods-MoviebuffUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviebuffUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviebuffUITests/Pods-MoviebuffUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		4456C7FE22DB664300334D30 /* AllMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesViewController.swift; sourceTree = "<group>"; };
+		4456C7FE22DB664300334D30 /* AllMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMovieViewController.swift; sourceTree = "<group>"; };
 		4456C80022DB665200334D30 /* AllMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMovieViewModel.swift; sourceTree = "<group>"; };
 		4456C80222DB666600334D30 /* AllMovieViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AllMovieViewController.storyboard; sourceTree = "<group>"; };
 		4456C80622DB6ADE00334D30 /* MovieViewModelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelCoordinator.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				44F81FEC22DB25E500A85F94 /* StartViewController.swift */,
 				4456C80822DB6E1700334D30 /* StartViewModel.swift */,
 				44F81FEE22DB25E500A85F94 /* StartViewController.storyboard */,
-				4456C7FE22DB664300334D30 /* AllMoviesViewController.swift */,
+				4456C7FE22DB664300334D30 /* AllMovieViewController.swift */,
 				4456C80022DB665200334D30 /* AllMovieViewModel.swift */,
 				4456C80222DB666600334D30 /* AllMovieViewController.storyboard */,
 				44F81FF122DB25E600A85F94 /* Assets.xcassets */,
@@ -213,7 +213,6 @@
 				44F81FF722DB25E700A85F94 /* Sources */,
 				44F81FF822DB25E700A85F94 /* Frameworks */,
 				44F81FF922DB25E700A85F94 /* Resources */,
-				F3D1501939F816B8C69CFD63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,23 +368,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Moviebuff/Pods-Moviebuff-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F3D1501939F816B8C69CFD63 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FFD684F94EE4CBA81A2257E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,7 +397,7 @@
 				4456C80B22DB6EF600334D30 /* MainCoordinator.swift in Sources */,
 				4456C80922DB6E1700334D30 /* StartViewModel.swift in Sources */,
 				44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */,
-				4456C7FF22DB664300334D30 /* AllMoviesViewController.swift in Sources */,
+				4456C7FF22DB664300334D30 /* AllMovieViewController.swift in Sources */,
 				4456C80122DB665200334D30 /* AllMovieViewModel.swift in Sources */,
 				4456C80722DB6ADE00334D30 /* MovieViewModelCoordinator.swift in Sources */,
 			);

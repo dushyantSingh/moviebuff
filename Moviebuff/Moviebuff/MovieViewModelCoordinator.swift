@@ -6,19 +6,25 @@
 //  Copyright © 2019 Dushyant Singh. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
 
 class MovieViewModelCoordinator {
+    
+    let navigationAction = PublishSubject<Any>()
+    private let disposeBag = DisposeBag()
     
     func setupStartViewModel() -> StartViewModel {
         let viewModel = StartViewModel()
         viewModel.events
-            .subscribe(onNext: { event in
+            .map { event in
                 switch event {
                 case .startLoadingMovies:
-                    print("start loading")
-                }
-            })
+                    let movie = Movie(name: "All Time Best")
+                    return AllMovieViewModel(movieList: [movie])
+                } }
+            .bind(to: self.navigationAction)
+            .disposed(by: disposeBag)
         return viewModel
     }
 }

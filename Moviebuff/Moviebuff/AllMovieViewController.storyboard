@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--All Movies View Controller-->
+        <!--All Movie View Controller-->
         <scene sceneID="9J0-Vl-x10">
             <objects>
-                <viewController id="Pye-0m-nGd" customClass="AllMoviesViewController" customModule="Moviebuff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllMovieViewController" id="Pye-0m-nGd" customClass="AllMovieViewController" customModule="Moviebuff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y1v-BR-njg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,6 +31,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pye-0m-nGd" id="Yqa-ie-iRR"/>
+                                    <outlet property="delegate" destination="Pye-0m-nGd" id="IRz-No-n5v"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
