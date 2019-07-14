@@ -213,6 +213,7 @@
 				44F81FF722DB25E700A85F94 /* Sources */,
 				44F81FF822DB25E700A85F94 /* Frameworks */,
 				44F81FF922DB25E700A85F94 /* Resources */,
+				F3D1501939F816B8C69CFD63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,6 +367,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Moviebuff/Pods-Moviebuff-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3D1501939F816B8C69CFD63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FFD684F94EE4CBA81A2257E5 /* [CP] Check Pods Manifest.lock */ = {
