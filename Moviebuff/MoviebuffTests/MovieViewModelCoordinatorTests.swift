@@ -6,7 +6,9 @@
 //  Copyright © 2019 Dushyant Singh. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
+
 @testable import Moviebuff
 
 class MoviebuffTests: XCTestCase {

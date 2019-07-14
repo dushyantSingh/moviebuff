@@ -15,14 +15,20 @@ public protocol ViewControllerProtocol {
     var viewModel: ViewModelT! { get set }
 }
 
-class StartViewController: UIViewController {
-
+class StartViewController: UIViewController, ViewControllerProtocol {
+    
+    typealias ViewModelT = StartViewModel
+    var viewModel: StartViewModel!
+    
+    private let disposeBag = DisposeBag()
     @IBOutlet weak var startButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         startButton.rx
             .tap
-            .map { }
+            .map { StartViewModelEvents.startLoadingMovies }
+        .bind(to: self.viewModel.events)
+        .disposed(by: disposeBag)
     }
 }
 
