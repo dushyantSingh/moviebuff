@@ -13,6 +13,7 @@
 		4456C80722DB6ADE00334D30 /* MovieViewModelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80622DB6ADE00334D30 /* MovieViewModelCoordinator.swift */; };
 		4456C80922DB6E1700334D30 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80822DB6E1700334D30 /* StartViewModel.swift */; };
 		4456C80B22DB6EF600334D30 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80A22DB6EF600334D30 /* MainCoordinator.swift */; };
+		445D7DEE22DE0E09007FD491 /* NavigationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445D7DED22DE0E09007FD491 /* NavigationHelpers.swift */; };
 		44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEA22DB25E500A85F94 /* AppDelegate.swift */; };
 		44F81FED22DB25E500A85F94 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEC22DB25E500A85F94 /* StartViewController.swift */; };
 		44F81FF022DB25E500A85F94 /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44F81FEE22DB25E500A85F94 /* StartViewController.storyboard */; };
@@ -52,6 +53,7 @@
 		4456C80622DB6ADE00334D30 /* MovieViewModelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelCoordinator.swift; sourceTree = "<group>"; };
 		4456C80822DB6E1700334D30 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		4456C80A22DB6EF600334D30 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		445D7DED22DE0E09007FD491 /* NavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHelpers.swift; sourceTree = "<group>"; };
 		44F81FE722DB25E500A85F94 /* Moviebuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviebuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F81FEA22DB25E500A85F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44F81FEC22DB25E500A85F94 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				44F81FEC22DB25E500A85F94 /* StartViewController.swift */,
 				4456C80822DB6E1700334D30 /* StartViewModel.swift */,
 				44F81FEE22DB25E500A85F94 /* StartViewController.storyboard */,
+				445D7DED22DE0E09007FD491 /* NavigationHelpers.swift */,
 				4456C7FE22DB664300334D30 /* AllMovieViewController.swift */,
 				4456C80022DB665200334D30 /* AllMovieViewModel.swift */,
 				4456C80222DB666600334D30 /* AllMovieViewController.storyboard */,
@@ -398,6 +401,7 @@
 				4456C80922DB6E1700334D30 /* StartViewModel.swift in Sources */,
 				44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */,
 				4456C7FF22DB664300334D30 /* AllMovieViewController.swift in Sources */,
+				445D7DEE22DE0E09007FD491 /* NavigationHelpers.swift in Sources */,
 				4456C80122DB665200334D30 /* AllMovieViewModel.swift in Sources */,
 				4456C80722DB6ADE00334D30 /* MovieViewModelCoordinator.swift in Sources */,
 			);

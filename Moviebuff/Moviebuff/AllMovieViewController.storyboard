@@ -32,8 +32,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Pye-0m-nGd" id="Yqa-ie-iRR"/>
-                                    <outlet property="delegate" destination="Pye-0m-nGd" id="IRz-No-n5v"/>
+                                    <outlet property="dataSource" destination="Pye-0m-nGd" id="fpt-jq-eZY"/>
+                                    <outlet property="delegate" destination="Pye-0m-nGd" id="9XZ-9E-ikT"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -46,6 +46,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CwK-P7-AQg"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="bwu-px-Izl" id="qLp-Bi-fKU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftr-c5-edM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

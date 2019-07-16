@@ -7,15 +7,35 @@
 //
 
 import Foundation
+import RxSwift
 import UIKit
 
 class AllMovieViewController: UIViewController, ViewControllerProtocol {
     typealias ViewModelT = AllMovieViewModel
     var viewModel: AllMovieViewModel!
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    private let disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupTableView()
+    }
+    
+    private func setupTableView() {
+        self.tableView.register(UITableViewCell.self,
+                                forCellReuseIdentifier: "MoiveCell")
+        
+        self.tableView.rx
+            .itemSelected.asObservable()
+            .map { _ in Movie(name: "Something") }
+            .bind(to: self.viewModel.selectedMovie)
+            .disposed(by: disposeBag)
+    }
 }
 
-extension AllMovieViewController: UITableViewDataSource {
+extension AllMovieViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.movieList.count
     }

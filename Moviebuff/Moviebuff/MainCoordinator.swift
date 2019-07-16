@@ -22,10 +22,15 @@ class MainCoordinator {
     
     private func setupNavigationAction() {
         viewModelCoordinator.navigationAction
-            .subscribe(onNext: {
-                let vc = self.getViewControllerFor(viewModel: $0)
-                self.mainNavigationController.pushViewController(vc, animated: true)})
-        .disposed(by: disposeBag)
+            .subscribe(onNext: { event in
+                switch event {
+                case .push(let viewModel, let animated):
+                    let vc = self.getViewControllerFor(viewModel: viewModel)
+                    self.mainNavigationController.pushViewController(vc, animated: animated)
+                case .pop(let animated):
+                    self.mainNavigationController.popViewController(animated: animated) 
+                } })
+            .disposed(by: disposeBag)
     }
     
     private func startApplication() {
@@ -47,18 +52,5 @@ class MainCoordinator {
         default:
             return UIViewController()
         }
-    }
-}
-
-extension UIViewController {
-    public static func make<T>(viewController: T.Type) -> T {
-        let viewControllerName = String(describing: viewController)
-        
-        let storyboard = UIStoryboard(name: viewControllerName, bundle: Bundle(for: viewController as! AnyClass))
-        
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerName) as? T else {
-            fatalError("Unable to create ViewController: \(viewControllerName) from storyboard: \(storyboard)")
-        }
-        return viewController
     }
 }
