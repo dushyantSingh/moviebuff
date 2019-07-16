@@ -17,10 +17,10 @@ target 'Moviebuff' do
 
   target 'MoviebuffTests' do
     inherit! :search_paths
-   	pod 'Quick', '~> 2.1'
-	pod 'Nimble', '~> 8.0'
-	pod 'RxBlocking', '~> 5'
-	pod 'RxTest',     '~> 5'
+		pod 'Quick', '~> 2.1'
+		pod 'Nimble', '~> 8.0'
+		pod 'RxBlocking', '~> 5'
+		pod 'RxTest',     '~> 5'
   end
 
   target 'MoviebuffUITests' do

@@ -14,6 +14,7 @@
 		4456C80922DB6E1700334D30 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80822DB6E1700334D30 /* StartViewModel.swift */; };
 		4456C80B22DB6EF600334D30 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C80A22DB6EF600334D30 /* MainCoordinator.swift */; };
 		445D7DEE22DE0E09007FD491 /* NavigationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445D7DED22DE0E09007FD491 /* NavigationHelpers.swift */; };
+		445D7DF222DE1817007FD491 /* MainCoordinatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445D7DF122DE1817007FD491 /* MainCoordinatorSpec.swift */; };
 		44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEA22DB25E500A85F94 /* AppDelegate.swift */; };
 		44F81FED22DB25E500A85F94 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEC22DB25E500A85F94 /* StartViewController.swift */; };
 		44F81FF022DB25E500A85F94 /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44F81FEE22DB25E500A85F94 /* StartViewController.storyboard */; };
@@ -54,6 +55,7 @@
 		4456C80822DB6E1700334D30 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		4456C80A22DB6EF600334D30 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		445D7DED22DE0E09007FD491 /* NavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHelpers.swift; sourceTree = "<group>"; };
+		445D7DF122DE1817007FD491 /* MainCoordinatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorSpec.swift; sourceTree = "<group>"; };
 		44F81FE722DB25E500A85F94 /* Moviebuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviebuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F81FEA22DB25E500A85F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44F81FEC22DB25E500A85F94 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				44F81FFF22DB25E700A85F94 /* MovieViewModelCoordinatorTests.swift */,
 				44F8200122DB25E700A85F94 /* Info.plist */,
+				445D7DF122DE1817007FD491 /* MainCoordinatorSpec.swift */,
 			);
 			path = MoviebuffTests;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				44F81FF722DB25E700A85F94 /* Sources */,
 				44F81FF822DB25E700A85F94 /* Frameworks */,
 				44F81FF922DB25E700A85F94 /* Resources */,
+				93014FE3CC08CEA871CFC32B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -371,6 +375,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Moviebuff/Pods-Moviebuff-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		93014FE3CC08CEA871CFC32B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoviebuffTests/Pods-MoviebuffTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FFD684F94EE4CBA81A2257E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445D7DF222DE1817007FD491 /* MainCoordinatorSpec.swift in Sources */,
 				44F8200022DB25E700A85F94 /* MovieViewModelCoordinatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
