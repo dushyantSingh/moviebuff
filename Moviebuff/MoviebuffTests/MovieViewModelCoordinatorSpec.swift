@@ -35,7 +35,7 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                                 navigationAction = $0  
                             })
                         .disposed(by: disposeBag)
-                        viewModel.events.onNext(.startLoadingMovies)
+                        viewModel.events.onNext(.startLoadingMovies(.success("Any")))
                     }
                     it("should push all movie view controller") {
                         expect(navigationAction).to(equal(NavigationAction.push(viewModel: "Any", animated: true)))
@@ -44,17 +44,19 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
             }
             context("create all movie view model") {
                 var viewModel: AllMovieViewModel!
+                var navigationalEvents: Observable<NavigationAction>!
                 beforeEach {
                     let movieA = Movie(name: "Movie 1")
                     let movieB = Movie(name: "Movie 2")
                     let movieC = Movie(name: "Movie 3")
                     
                     viewModel = AllMovieViewModel(movieList: [movieA, movieB, movieC])
+                   navigationalEvents = subject.setup(allMovieViewModel: viewModel)
                 }
                 context("when movie is selected") {
                     var navigationAction: NavigationAction!
                     beforeEach {
-                        subject.navigationAction
+                        navigationalEvents
                             .subscribe(onNext:{
                                 navigationAction = $0
                             })

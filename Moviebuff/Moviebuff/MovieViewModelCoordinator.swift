@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Moya
 
 class MovieViewModelCoordinator {
     
@@ -16,7 +17,9 @@ class MovieViewModelCoordinator {
     
    
     func setupStartViewModel() -> StartViewModel {
-        let viewModel = StartViewModel()
+        let service = MovieService(provider: MoyaProvider<MovieTarget>())
+        let viewModel = StartViewModel(movieService: service)
+        
         self.setup(startViewModel: viewModel)
         .startWith(.push(viewModel: viewModel, animated: true))
         .bind(to: navigationAction)

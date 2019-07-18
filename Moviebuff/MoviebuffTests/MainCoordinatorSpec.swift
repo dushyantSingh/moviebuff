@@ -8,6 +8,7 @@
 
 import Quick
 import Nimble
+import Moya
 
 @testable import Moviebuff
 
@@ -23,7 +24,8 @@ class MainCoordinatorSpec: QuickSpec {
             }
             context("when navigation action emits push") {
                 beforeEach {
-                    let viewModel = StartViewModel()
+                    let service = MovieService(provider: MoyaProvider<MovieTarget>())
+                    let viewModel = StartViewModel(movieService: service)
                     subject.viewModelCoordinator
                         .navigationAction.onNext(.push(viewModel: viewModel,
                                                        animated: true))
