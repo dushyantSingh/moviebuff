@@ -9,21 +9,17 @@
 import Foundation
 import RxSwift
 
-struct Movie {
-    let name: String!
-}
-
 enum AllMovieViewModelEvents {
     case selectedMovie(movie: Movie)
 }
 class AllMovieViewModel {
-    let movieList: [Movie]
+    let movieList: MovieListModel
     let selectedMovie = PublishSubject<Movie>()
     let events = PublishSubject<AllMovieViewModelEvents>()
     
     private let disposeBag = DisposeBag()
     
-    init(movieList: [Movie]) {
+    init(movieList: MovieListModel) {
         self.movieList = movieList
         setupSelectedMovie()
     }

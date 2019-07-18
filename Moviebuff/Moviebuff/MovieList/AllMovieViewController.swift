@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxOptional
 import UIKit
 
 class AllMovieViewController: UIViewController, ViewControllerProtocol {
@@ -29,7 +30,8 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
         
         self.tableView.rx
             .itemSelected.asObservable()
-            .map { _ in Movie(name: "Something") }
+            .map { self.viewModel.movieList.movies?[$0.row] }
+            .filterNil()
             .bind(to: self.viewModel.selectedMovie)
             .disposed(by: disposeBag)
     }
@@ -37,14 +39,14 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
 
 extension AllMovieViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.movieList.count
+        return viewModel.movieList.movies?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoiveCell") else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = self.viewModel.movieList[indexPath.row].name
+        cell.textLabel?.text = self.viewModel.movieList.movies?[indexPath.row].title
         return cell
     }
 }

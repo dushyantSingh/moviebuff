@@ -32,11 +32,16 @@ class MovieViewModelCoordinator {
         return startViewModel.events
             .flatMap { event  -> Observable<NavigationAction> in
                 switch event {
-                case .startLoadingMovies:
-                    let movie = Movie(name: "All Time Best")
-                    let viewModel = AllMovieViewModel(movieList: [movie])
+                case .startLoadingMovies(.success(let movieList)):
+                    let viewModel = AllMovieViewModel(movieList: movieList as! MovieListModel)
                     return self.setup(allMovieViewModel: viewModel)
                         .startWith(.push(viewModel: viewModel, animated: true))
+                case .startLoadingMovies(.waiting):
+                    print("Loading")
+                   return Observable.empty()
+                case .startLoadingMovies(.failed):
+                    print("failed")
+                    return Observable.empty()
                 }
         }
     }
