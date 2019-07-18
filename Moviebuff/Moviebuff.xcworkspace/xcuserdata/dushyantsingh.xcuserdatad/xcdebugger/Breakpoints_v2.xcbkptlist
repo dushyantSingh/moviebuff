@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "retrieveMovieList(page:)"
-            landmarkType = "7">
+            landmarkName = "MovieService"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
