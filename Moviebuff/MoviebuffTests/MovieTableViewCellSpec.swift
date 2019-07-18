@@ -31,7 +31,32 @@ class MovieTableViewCellSpec: QuickSpec {
                 subject = nibView
             }
             context("when configuring the cell") {
-                
+                context("without image") {
+                    beforeEach {
+                        subject.configure(title: "Some title", image: nil)
+                    }
+                    it("should show title") {
+                        expect(subject.titleLabel.text).to(equal("Some title"))
+                        expect(subject.titleLabel.isHidden).to(beFalse())
+                    }
+                    it("should not show image view") {
+                        expect(subject.movieImageView.isHidden).to(beTrue())
+                        expect(subject.movieImageView.image).to(beNil())
+                    }
+                }
+                context("with image") {
+                    beforeEach {
+                        subject.configure(title: "Some title", image: UIImage(named: "movie"))
+                    }
+                    it("should show title") {
+                        expect(subject.titleLabel.text).to(equal("Some title"))
+                        expect(subject.titleLabel.isHidden).to(beFalse())
+                    }
+                    it("should show image view") {
+                        expect(subject.movieImageView.isHidden).to(beFalse())
+                        expect(subject.movieImageView.image).to(equal(UIImage(named: "movie")))
+                    }
+                }
             }
         }
     }

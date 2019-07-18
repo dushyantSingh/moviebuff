@@ -30,7 +30,14 @@ class MovieTableViewCell: UITableViewCell {
     func configure(title: String,
                    image: UIImage?) {
         self.titleLabel.text = title
-        self.movieImageView?.image = image
+        
+        if let image = image {
+            self.movieImageView?.image = image
+            self.movieImageView.isHidden = false
+        } else {
+            self.movieImageView.isHidden = true
+            self.movieImageView.image = nil
+        }
         
     }
 }

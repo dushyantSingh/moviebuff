@@ -35,7 +35,7 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                                 navigationAction = $0  
                             })
                         .disposed(by: disposeBag)
-                        viewModel.events.onNext(.startLoadingMovies(.success("Any")))
+                        viewModel.events.onNext(.startLoadingMovies(.success(MovieListModelFactory.movieList)))
                     }
                     it("should push all movie view controller") {
                         expect(navigationAction).to(equal(NavigationAction.push(viewModel: "Any", animated: true)))
@@ -46,11 +46,7 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                 var viewModel: AllMovieViewModel!
                 var navigationalEvents: Observable<NavigationAction>!
                 beforeEach {
-                    let movieA = Movie(name: "Movie 1")
-                    let movieB = Movie(name: "Movie 2")
-                    let movieC = Movie(name: "Movie 3")
-                    
-                    viewModel = AllMovieViewModel(movieList: [movieA, movieB, movieC])
+                    viewModel = AllMovieViewModel(movieList: MovieListModelFactory.movieList)
                    navigationalEvents = subject.setup(allMovieViewModel: viewModel)
                 }
                 context("when movie is selected") {
@@ -61,7 +57,7 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                                 navigationAction = $0
                             })
                             .disposed(by: disposeBag)
-                        viewModel.events.onNext(.selectedMovie(movie: Movie(name: "Movie 1")))
+                        viewModel.events.onNext(.selectedMovie(movie: MovieListModelFactory.movieA))
                     }
                     it("should push selected movie view model") {
                         expect(navigationAction).to(equal(NavigationAction.push(viewModel: "Any model", animated: true)))
@@ -70,4 +66,22 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
             }
         }
     }
+}
+
+struct MovieListModelFactory {
+    static let movieA = Movie(id: 1,
+                              title: "Title A",
+                              posterPath: "Image A",
+                              overview: "Description A")
+    
+    static let movieD = Movie(id: 2,
+                              title: "Title D",
+                              posterPath: "Image D",
+                              overview: "Description D")
+    
+    static let movieList = MovieListModel(page: 1,
+                                          totalPages: 2,
+                                          totalResults: 2,
+                                          movies: [MovieListModelFactory.movieA,
+                                                   MovieListModelFactory.movieD])
 }
