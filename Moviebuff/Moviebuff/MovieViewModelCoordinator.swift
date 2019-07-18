@@ -26,14 +26,16 @@ class MovieViewModelCoordinator {
     }
     
     func setup(startViewModel: StartViewModel) -> Observable<NavigationAction> {
-        return startViewModel.events.flatMap { event  -> Observable<NavigationAction> in
-            switch event {
-            case .startLoadingMovies:
-                let movie = Movie(name: "All Time Best")
-                let viewModel = AllMovieViewModel(movieList: [movie])
-                return self.setup(allMovieViewModel: viewModel)
-                    .startWith(.push(viewModel: viewModel, animated: true))
-            } }
+        return startViewModel.events
+            .flatMap { event  -> Observable<NavigationAction> in
+                switch event {
+                case .startLoadingMovies:
+                    let movie = Movie(name: "All Time Best")
+                    let viewModel = AllMovieViewModel(movieList: [movie])
+                    return self.setup(allMovieViewModel: viewModel)
+                        .startWith(.push(viewModel: viewModel, animated: true))
+                }
+        }
     }
     
     func setup(allMovieViewModel: AllMovieViewModel) -> Observable<NavigationAction> {
@@ -41,9 +43,18 @@ class MovieViewModelCoordinator {
             .flatMap { event -> Observable<NavigationAction> in
                 switch event {
                 case .selectedMovie(let movie):
-                    print("Selected Movie \(movie.name)")
-                    return Observable.empty()
+                    let viewModel = SelectedMovieViewModel()
+                    return self.setup(selectedViewModel: viewModel)
+                        .startWith(.push(viewModel: viewModel, animated: true))
                 }
+        }
+    }
+    
+    func setup(selectedViewModel: SelectedMovieViewModel) -> Observable<NavigationAction> {
+        return selectedViewModel.events
+            .flatMap { _ -> Observable<NavigationAction> in
+                print("Something")
+                return Observable.empty()
         }
     }
 }

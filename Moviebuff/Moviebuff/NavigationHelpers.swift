@@ -13,6 +13,18 @@ enum NavigationAction {
     case pop(animated: Bool)
 }
 
+extension NavigationAction: Equatable {
+    static func == (lhs: NavigationAction, rhs: NavigationAction) -> Bool {
+        switch (lhs, rhs) {
+        case (.push, .push):
+            return true
+        case (.pop, .pop):
+            return true
+        default: return false
+        }
+    }
+}
+
 extension UIViewController {
     public static func make<T>(viewController: T.Type) -> T {
         let viewControllerName = String(describing: viewController)

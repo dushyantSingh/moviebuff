@@ -9,14 +9,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Moviebuff/MovieViewModelCoordinator.swift"
-            timestampString = "584982633.851521"
+            filePath = "Moviebuff/MovieService.swift"
+            timestampString = "585075260.495406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "setup(startViewModel:)"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "retrieveMovieList(page:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Result.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Moviebuff.MovieService.retrieveMovieList(page: Swift.Int) -&gt; ()"
+                  moduleName = "Moviebuff"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dushyantsingh/workspace/moviebuff/Moviebuff/Moviebuff/MovieService.swift"
+                  timestampString = "585075261.2134939"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "177">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Result.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Moviebuff.MovieService.retrieveMovieList(page: Swift.Int) -&gt; ()"
+                  moduleName = "Moviebuff"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dushyantsingh/workspace/moviebuff/Moviebuff/Moviebuff/MovieService.swift"
+                  timestampString = "585075261.214983"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "184">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

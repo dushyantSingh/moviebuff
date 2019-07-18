@@ -49,6 +49,10 @@ class MainCoordinator {
             let vc = UIViewController.make(viewController: AllMovieViewController.self)
             vc.viewModel = viewModel
             return vc
+        case let viewModel as SelectedMovieViewModel:
+            let vc = UIViewController.make(viewController: SelectedMovieViewController.self)
+            vc.viewModel = viewModel
+            return vc
         default:
             return UIViewController()
         }
