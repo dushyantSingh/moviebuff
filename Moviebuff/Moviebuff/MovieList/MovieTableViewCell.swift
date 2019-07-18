@@ -6,4 +6,31 @@
 //  Copyright © 2019 Dushyant Singh. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class MovieTableViewCell: UITableViewCell {
+    @IBOutlet var movieImageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+    
+    @IBOutlet weak var cellBackground: UIView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupLabel()
+        setupView()
+    }
+    
+    private func setupView() {
+        cellBackground.layer.cornerRadius = 3
+    }
+    private func setupLabel() {
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.textColor = UIColor.darkGray
+    }
+    
+    func configure(title: String,
+                   image: UIImage?) {
+        self.titleLabel.text = title
+        self.movieImageView?.image = image
+        
+    }
+}

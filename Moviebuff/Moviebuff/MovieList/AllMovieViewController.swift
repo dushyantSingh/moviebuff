@@ -25,8 +25,9 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
     }
     
     private func setupTableView() {
-        self.tableView.register(UITableViewCell.self,
-                                forCellReuseIdentifier: "MoiveCell")
+        let nib = UINib(nibName: "MovieTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "MovieTableViewCell")
+        self.tableView.backgroundView?.backgroundColor = UIColor(white: 230.0 / 255.0, alpha: 1.0)
         
         self.tableView.rx
             .itemSelected.asObservable()
@@ -43,10 +44,12 @@ extension AllMovieViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoiveCell") else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as? MovieTableViewCell
+            else {
+                return UITableViewCell()
         }
-        cell.textLabel?.text = self.viewModel.movieList.movies?[indexPath.row].title
+        cell.configure(title: self.viewModel.movieList.movies?[indexPath.row].title ?? "No name",
+                       image: UIImage(named: "movie"))
         return cell
     }
 }

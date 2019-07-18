@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/dushyantsingh/workspace/moviebuff/Moviebuff/Moviebuff/MovieList/MovieTableViewCell.xib">
+   </FileRef>
+   <FileRef
       location = "group:Moviebuff.xcodeproj">
    </FileRef>
    <FileRef

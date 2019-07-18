@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Moya
 
-public protocol ViewControllerProtocol {
+protocol ViewControllerProtocol {
     associatedtype ViewModelT
     var viewModel: ViewModelT! { get set }
 }
