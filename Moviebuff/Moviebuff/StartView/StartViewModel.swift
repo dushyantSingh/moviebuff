@@ -13,6 +13,22 @@ import Moya
 enum StartViewModelEvents {
     case startLoadingMovies(NetworkingEvent)
 }
+
+extension StartViewModelEvents: Equatable {
+    static func == (lhs: StartViewModelEvents, rhs: StartViewModelEvents) -> Bool {
+        switch (lhs, rhs) {
+        case (.startLoadingMovies(.waiting),.startLoadingMovies(.waiting)):
+            return true
+        case (.startLoadingMovies(.success),.startLoadingMovies(.success)):
+            return true
+        case (.startLoadingMovies(.failed),.startLoadingMovies(.failed)):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 class StartViewModel {
     var title: String
     let movieService: MovieService

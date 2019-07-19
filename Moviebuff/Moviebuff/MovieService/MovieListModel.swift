@@ -7,6 +7,7 @@
 //
 
 import HandyJSON
+import Foundation
 
 struct MovieListModel: HandyJSON {
     var page: Int?
@@ -29,5 +30,23 @@ struct Movie: HandyJSON {
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<< posterPath <-- "poster_path"
+    }
+}
+
+extension MovieListModel: Equatable {
+    static func == (lhs: MovieListModel, rhs: MovieListModel) -> Bool {
+        return lhs.page == rhs.page
+        && lhs.totalPages == rhs.totalPages
+        && lhs.totalResults == rhs.totalResults
+        && lhs.movies == rhs.movies
+    }
+}
+
+extension Movie: Equatable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+        && lhs.title == rhs.title
+        && lhs.posterPath == rhs.posterPath
+        && lhs.overview == rhs.overview
     }
 }

@@ -12,6 +12,20 @@ import RxSwift
 enum AllMovieViewModelEvents {
     case selectedMovie(movie: Movie)
 }
+
+extension AllMovieViewModelEvents: Equatable {
+    static func == (lhs: AllMovieViewModelEvents, rhs: AllMovieViewModelEvents) -> Bool {
+        switch (lhs, rhs) {
+        case (.selectedMovie(let A), .selectedMovie(let B)):
+            return A == B
+        default:
+            return false
+        }
+    }
+    
+    
+}
+
 class AllMovieViewModel {
     let movieList: MovieListModel
     let selectedMovie = PublishSubject<Movie>()
