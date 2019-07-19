@@ -17,8 +17,9 @@ class MainCoordinatorSpec: QuickSpec {
     override func spec() {
         describe("MainCoordinator") {
             var subject: MainCoordinator!
-            var mockNavigationController = MockNavigationController()
+            var mockNavigationController: MockNavigationController!
             beforeEach {
+                mockNavigationController = MockNavigationController()
                 subject = MainCoordinator()
                 subject.mainNavigationController = mockNavigationController
             }

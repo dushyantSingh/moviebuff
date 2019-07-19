@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jE9-0D-RPs">
-                        <rect key="frame" x="15" y="5" width="477" height="90"/>
+                        <rect key="frame" x="15" y="10.5" width="477" height="90"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie" translatesAutoresizingMaskIntoConstraints="NO" id="Qvo-IR-ABE">
                                 <rect key="frame" x="10" y="5" width="60" height="80"/>
@@ -50,8 +50,8 @@
                 <constraints>
                     <constraint firstItem="jE9-0D-RPs" firstAttribute="leading" secondItem="Kvw-ub-N6b" secondAttribute="leading" constant="15" id="PS7-6U-3rf"/>
                     <constraint firstAttribute="trailing" secondItem="jE9-0D-RPs" secondAttribute="trailing" constant="15" id="fGF-R9-cm6"/>
-                    <constraint firstItem="jE9-0D-RPs" firstAttribute="top" secondItem="Kvw-ub-N6b" secondAttribute="top" constant="5" id="rLB-EU-FcG"/>
-                    <constraint firstAttribute="bottom" secondItem="jE9-0D-RPs" secondAttribute="bottom" constant="5" id="y5j-Y6-t1t"/>
+                    <constraint firstItem="jE9-0D-RPs" firstAttribute="top" secondItem="Kvw-ub-N6b" secondAttribute="top" constant="10" id="rLB-EU-FcG"/>
+                    <constraint firstAttribute="bottom" secondItem="jE9-0D-RPs" secondAttribute="bottom" constant="10" id="y5j-Y6-t1t"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
