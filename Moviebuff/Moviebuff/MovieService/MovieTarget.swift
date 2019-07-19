@@ -27,7 +27,7 @@ extension MovieTarget: TargetType {
     }
     
     var sampleData: Data {
-        return Data()
+        return ResponseLoader.loadResponse(file: "MovieList")
     }
     
     var task: Task {

@@ -25,6 +25,9 @@
 		446A4A2F22E0E5B4003D7D3E /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446A4A2E22E0E5B4003D7D3E /* MovieTableViewCell.swift */; };
 		446A4A3322E0E611003D7D3E /* MovieTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446A4A3222E0E611003D7D3E /* MovieTableViewCellSpec.swift */; };
 		446A4A3522E0F096003D7D3E /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446A4A3422E0E82F003D7D3E /* MovieTableViewCell.xib */; };
+		446A4A3A22E207CC003D7D3E /* FakeMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446A4A3922E207CC003D7D3E /* FakeMoyaProvider.swift */; };
+		446A4A3D22E20D07003D7D3E /* MovieList.json in Resources */ = {isa = PBXBuildFile; fileRef = 446A4A3C22E20D07003D7D3E /* MovieList.json */; };
+		446A4A3F22E20D5E003D7D3E /* ResponseLoaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446A4A3E22E20D5E003D7D3E /* ResponseLoaded.swift */; };
 		44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEA22DB25E500A85F94 /* AppDelegate.swift */; };
 		44F81FED22DB25E500A85F94 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F81FEC22DB25E500A85F94 /* StartViewController.swift */; };
 		44F81FF022DB25E500A85F94 /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44F81FEE22DB25E500A85F94 /* StartViewController.storyboard */; };
@@ -76,6 +79,9 @@
 		446A4A2E22E0E5B4003D7D3E /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		446A4A3222E0E611003D7D3E /* MovieTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCellSpec.swift; sourceTree = "<group>"; };
 		446A4A3422E0E82F003D7D3E /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MovieTableViewCell.xib; path = /Users/dushyantsingh/workspace/moviebuff/Moviebuff/Moviebuff/MovieList/MovieTableViewCell.xib; sourceTree = "<absolute>"; };
+		446A4A3922E207CC003D7D3E /* FakeMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMoyaProvider.swift; sourceTree = "<group>"; };
+		446A4A3C22E20D07003D7D3E /* MovieList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MovieList.json; sourceTree = "<group>"; };
+		446A4A3E22E20D5E003D7D3E /* ResponseLoaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseLoaded.swift; sourceTree = "<group>"; };
 		44F81FE722DB25E500A85F94 /* Moviebuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviebuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F81FEA22DB25E500A85F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44F81FEC22DB25E500A85F94 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +186,23 @@
 			path = StartView;
 			sourceTree = "<group>";
 		};
+		446A4A3822E207BA003D7D3E /* FakeMoya */ = {
+			isa = PBXGroup;
+			children = (
+				446A4A3922E207CC003D7D3E /* FakeMoyaProvider.swift */,
+			);
+			path = FakeMoya;
+			sourceTree = "<group>";
+		};
+		446A4A3B22E20C7E003D7D3E /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				446A4A3C22E20D07003D7D3E /* MovieList.json */,
+				446A4A3E22E20D5E003D7D3E /* ResponseLoaded.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
 		44F81FDE22DB25E500A85F94 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +236,7 @@
 				446A4A2722E0C94F003D7D3E /* MovieList */,
 				446A4A2822E0C970003D7D3E /* SelectedMovie */,
 				446A4A2622E0C91E003D7D3E /* MovieService */,
+				446A4A3B22E20C7E003D7D3E /* MockData */,
 				44F81FF122DB25E600A85F94 /* Assets.xcassets */,
 				44F81FF322DB25E600A85F94 /* LaunchScreen.storyboard */,
 				44F81FF622DB25E600A85F94 /* Info.plist */,
@@ -223,6 +247,7 @@
 		44F81FFE22DB25E700A85F94 /* MoviebuffTests */ = {
 			isa = PBXGroup;
 			children = (
+				446A4A3822E207BA003D7D3E /* FakeMoya */,
 				44F81FFF22DB25E700A85F94 /* MovieViewModelCoordinatorSpec.swift */,
 				445D7DF122DE1817007FD491 /* MainCoordinatorSpec.swift */,
 				446A4A2922E0CB26003D7D3E /* StartViewControllerSpec.swift */,
@@ -361,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4456C80322DB666600334D30 /* AllMovieViewController.storyboard in Resources */,
+				446A4A3D22E20D07003D7D3E /* MovieList.json in Resources */,
 				446A4A1F22DF6ADC003D7D3E /* SelectedMovieViewController.storyboard in Resources */,
 				446A4A3522E0F096003D7D3E /* MovieTableViewCell.xib in Resources */,
 				44F81FF522DB25E600A85F94 /* LaunchScreen.storyboard in Resources */,
@@ -489,6 +515,7 @@
 				4456C80B22DB6EF600334D30 /* MainCoordinator.swift in Sources */,
 				4456C80922DB6E1700334D30 /* StartViewModel.swift in Sources */,
 				44F81FEB22DB25E500A85F94 /* AppDelegate.swift in Sources */,
+				446A4A3F22E20D5E003D7D3E /* ResponseLoaded.swift in Sources */,
 				446A4A2522DF802D003D7D3E /* MovieService.swift in Sources */,
 				4456C7FF22DB664300334D30 /* AllMovieViewController.swift in Sources */,
 				445D7DEE22DE0E09007FD491 /* NavigationHelpers.swift in Sources */,
@@ -504,6 +531,7 @@
 			files = (
 				446A4A2A22E0CB26003D7D3E /* StartViewControllerSpec.swift in Sources */,
 				445D7DF222DE1817007FD491 /* MainCoordinatorSpec.swift in Sources */,
+				446A4A3A22E207CC003D7D3E /* FakeMoyaProvider.swift in Sources */,
 				446A4A3322E0E611003D7D3E /* MovieTableViewCellSpec.swift in Sources */,
 				44F8200022DB25E700A85F94 /* MovieViewModelCoordinatorSpec.swift in Sources */,
 			);
