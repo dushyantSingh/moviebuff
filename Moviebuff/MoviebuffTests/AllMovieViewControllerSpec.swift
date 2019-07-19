@@ -16,7 +16,10 @@ class AllMovieViewControllerSpec: QuickSpec {
     override func spec() {
         describe("AllMovieViewControllerSpec") {
             var subject: AllMovieViewController!
+            var disposeBag: DisposeBag!
+            
             beforeEach {
+                disposeBag = DisposeBag()
                 let viewModel = AllMovieViewModel(movieList: MovieListModelFactory.movieList)
                 subject = UIViewController.make(viewController: AllMovieViewController.self)
                 subject.viewModel = viewModel
@@ -39,6 +42,21 @@ class AllMovieViewControllerSpec: QuickSpec {
                     expect(cellA?.titleLabel.isHidden).to(beFalse())
                     expect(cellD?.titleLabel.text).to(equal("Title D"))
                     expect(cellD?.titleLabel.isHidden).to(beFalse())
+                }
+            }
+            context("when cell is tapped") {
+                it("should select the movie") {
+                    var selectedMovie: Movie?
+                    subject.viewModel.selectedMovie
+                        .asObservable()
+                        .subscribe(onNext: { selectedMovie = $0 })
+                        .disposed(by: disposeBag)
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    subject.tableView.delegate?.tableView!(
+                        subject.tableView, didSelectRowAt: indexPath)
+                    
+                    expect(selectedMovie).to(equal(MovieListModelFactory.movieA))
                 }
             }
         }
