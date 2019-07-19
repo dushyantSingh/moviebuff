@@ -36,4 +36,9 @@ extension UIViewController {
         }
         return viewController
     }
+    
+    func isNearTheBottomEdge(contentOffset: CGPoint,
+                             _ tableView: UITableView) -> Bool {
+        return contentOffset.y + tableView.frame.size.height + StartLoadingOffset > tableView.contentSize.height
+    }
 }
