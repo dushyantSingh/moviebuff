@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MovieTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VOd-fs-OA9" customClass="MovieTableViewCell" customModule="Moviebuff">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MovieTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="VOd-fs-OA9" customClass="MovieTableViewCell" customModule="Moviebuff">
             <rect key="frame" x="0.0" y="0.0" width="507" height="107"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VOd-fs-OA9" id="Kvw-ub-N6b">
@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jE9-0D-RPs">
-                        <rect key="frame" x="15" y="10.5" width="477" height="90"/>
+                        <rect key="frame" x="12" y="10.5" width="483" height="90"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie" translatesAutoresizingMaskIntoConstraints="NO" id="Qvo-IR-ABE">
                                 <rect key="frame" x="10" y="5" width="60" height="80"/>
@@ -28,7 +28,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-mP-Acl">
-                                <rect key="frame" x="85" y="34.5" width="382" height="20.5"/>
+                                <rect key="frame" x="85" y="34.5" width="388" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,8 +48,8 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="jE9-0D-RPs" firstAttribute="leading" secondItem="Kvw-ub-N6b" secondAttribute="leading" constant="15" id="PS7-6U-3rf"/>
-                    <constraint firstAttribute="trailing" secondItem="jE9-0D-RPs" secondAttribute="trailing" constant="15" id="fGF-R9-cm6"/>
+                    <constraint firstItem="jE9-0D-RPs" firstAttribute="leading" secondItem="Kvw-ub-N6b" secondAttribute="leading" constant="12" id="PS7-6U-3rf"/>
+                    <constraint firstAttribute="trailing" secondItem="jE9-0D-RPs" secondAttribute="trailing" constant="12" id="fGF-R9-cm6"/>
                     <constraint firstItem="jE9-0D-RPs" firstAttribute="top" secondItem="Kvw-ub-N6b" secondAttribute="top" constant="10" id="rLB-EU-FcG"/>
                     <constraint firstAttribute="bottom" secondItem="jE9-0D-RPs" secondAttribute="bottom" constant="10" id="y5j-Y6-t1t"/>
                 </constraints>

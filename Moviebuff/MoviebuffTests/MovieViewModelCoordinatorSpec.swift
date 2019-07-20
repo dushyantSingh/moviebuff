@@ -8,6 +8,7 @@
 
 import Quick
 import Nimble
+import Moya
 import RxSwift
 
 @testable import Moviebuff
@@ -46,7 +47,8 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                 var viewModel: AllMovieViewModel!
                 var navigationalEvents: Observable<NavigationAction>!
                 beforeEach {
-                    viewModel = AllMovieViewModel(movieList: MovieListModelFactory.movieList)
+                    viewModel = AllMovieViewModel(movieList: MovieListModelFactory.movieList,
+                                                  service: MovieService(provider: MoyaProvider<MovieTarget>()))
                    navigationalEvents = subject.setup(allMovieViewModel: viewModel)
                 }
                 context("when movie is selected") {

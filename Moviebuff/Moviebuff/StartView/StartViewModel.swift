@@ -38,7 +38,7 @@ class StartViewModel {
     
     private let disposeBag = DisposeBag()
     init(movieService: MovieService) {
-        self.title = "Application Start"
+        self.title = "MovieBuff"
         self.movieService = movieService
         
         setupStart()

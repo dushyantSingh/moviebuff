@@ -30,7 +30,7 @@ class StartViewControllerSpec : QuickSpec {
             }
             context("when the View loads") {
                 it("should have the title") {
-                    expect(subject.title).to(equal("Application Start"))
+                    expect(subject.title).to(equal("MovieBuff"))
                 }
                 it("should have a start button") {
                     expect(subject.startButton.isHidden).to(beFalse())

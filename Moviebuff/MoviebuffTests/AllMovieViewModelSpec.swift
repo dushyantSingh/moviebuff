@@ -17,9 +17,13 @@ class AllMovieViewModelSpec: QuickSpec {
         describe("AllMovieViewModel") {
             var subject: AllMovieViewModel!
             var disposeBag: DisposeBag!
+            var fakeProvider: FakeMoyaProvider<MovieTarget>!
             beforeEach {
                 disposeBag = DisposeBag()
-                subject = AllMovieViewModel(movieList: MovieListModelFactory.movieList)
+                fakeProvider = FakeMoyaProvider<MovieTarget>()
+                let fakeMovieService = MovieService(provider: fakeProvider)
+                subject = AllMovieViewModel(movieList: MovieListModelFactory.movieList,
+                                            service: fakeMovieService)
             }
             context("when movie is selected") {
                 var latestEvent: AllMovieViewModelEvents!
@@ -32,6 +36,38 @@ class AllMovieViewModelSpec: QuickSpec {
                 }
                 it("should emit selected movie event") {
                     expect(latestEvent).to(equal(AllMovieViewModelEvents.selectedMovie(movie: MovieListModelFactory.movieA)))
+                }
+            }
+            context("when page reload is called") {
+                var movieListUpdateIsCalled = false
+                beforeEach {
+                    subject.movieList
+                        .asObservable()
+                        .subscribe(onNext: { _ in movieListUpdateIsCalled = true})
+                        .disposed(by: disposeBag)
+                }
+                context("when current page is less than total pages") {
+                    beforeEach {
+                        movieListUpdateIsCalled = false
+                        subject.getNextPageMovie.onNext(())
+                    }
+
+                    it("should trigger movie list update") {
+                        fakeProvider.responseStatusCode.onNext(200)
+                        expect(movieListUpdateIsCalled).to(beTrue())
+                    }
+                }
+                context("when current page is equal to total pages") {
+                    beforeEach {
+                        subject.currentPage = 2
+                        movieListUpdateIsCalled = false
+                        subject.getNextPageMovie.onNext(())
+                    }
+
+                    it("should not trigger movie list update") {
+                        fakeProvider.responseStatusCode.onNext(200)
+                        expect(movieListUpdateIsCalled).to(beFalse())
+                    }
                 }
             }
         }

@@ -33,14 +33,20 @@ class MovieViewModelCoordinator {
             .flatMap { event  -> Observable<NavigationAction> in
                 switch event {
                 case .startLoadingMovies(.success(let movieList)):
-                    let viewModel = AllMovieViewModel(movieList: movieList as! MovieListModel)
+                    guard let movieList = movieList as? MovieListModel
+                        else { return Observable.empty() }
+                    
+                    let movieService = MovieService(provider: MoyaProvider<MovieTarget>())
+                    let viewModel = AllMovieViewModel(movieList: movieList,
+                                                      service: movieService)
+                    
                     return self.setup(allMovieViewModel: viewModel)
                         .startWith(.push(viewModel: viewModel, animated: true))
+                    
                 case .startLoadingMovies(.waiting):
-                    print("Loading")
                    return Observable.empty()
+                    
                 case .startLoadingMovies(.failed):
-                    print("failed")
                     return Observable.empty()
                 }
         }
@@ -50,7 +56,7 @@ class MovieViewModelCoordinator {
         return allMovieViewModel.events
             .flatMap { event -> Observable<NavigationAction> in
                 switch event {
-                case .selectedMovie(let movie):
+                case .selectedMovie:
                     let viewModel = SelectedMovieViewModel()
                     return self.setup(selectedViewModel: viewModel)
                         .startWith(.push(viewModel: viewModel, animated: true))

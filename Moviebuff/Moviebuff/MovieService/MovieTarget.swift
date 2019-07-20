@@ -11,15 +11,28 @@ import RxSwift
 
 enum MovieTarget {
     case getListOfMovie(page: Int)
+    case getPosterImage(path: String)
 }
 
 extension MovieTarget: TargetType {
     var baseURL: URL {
-        return Enviornment.manager.baseURL
+        switch self {
+        case .getListOfMovie:
+            return Enviornment.manager.baseURL
+        case .getPosterImage:
+            return Enviornment.manager.posterURL
+        }
+        
     }
     
     var path: String {
-        return "movie/popular"
+        switch self {
+        case .getListOfMovie:
+             return "movie/popular"
+        case .getPosterImage(let path):
+            return "w185/\(path)"
+        }
+       
     }
     
     var method: Moya.Method {
@@ -27,7 +40,12 @@ extension MovieTarget: TargetType {
     }
     
     var sampleData: Data {
-        return ResponseLoader.loadResponse(file: "MovieList")
+        switch self {
+        case .getListOfMovie:
+            return ResponseLoader.loadResponse(file: "MovieList")
+        case .getPosterImage:
+            return UIImage(named: "DummyImage")!.pngData()!
+        }
     }
     
     var task: Task {
@@ -36,6 +54,8 @@ extension MovieTarget: TargetType {
             return .requestParameters(parameters:["api_key": Enviornment.manager.apiKey,
                                                   "page": page],
                                       encoding: URLEncoding.queryString)
+        case .getPosterImage:
+            return .requestPlain
         }
         
     }
@@ -51,6 +71,10 @@ class Enviornment {
     
     var baseURL: URL {
         return URL(string: "https://api.themoviedb.org/3/")!
+    }
+    
+    var posterURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/")!
     }
     
     let apiKey = "48d3884bb23652fb744387b847d49137"

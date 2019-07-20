@@ -18,6 +18,7 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private let disposeBag = DisposeBag()
+    var skipTime = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +32,40 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
         
         self.tableView.rx
             .itemSelected.asObservable()
-            .map { self.viewModel.movieList.movies?[$0.row] }
+            .map { self.viewModel.movieList.value.movies?[$0.row] }
             .filterNil()
             .bind(to: self.viewModel.selectedMovie)
             .disposed(by: disposeBag)
+        
+        self.tableView.rx.contentOffset
+            .debounce(1, scheduler: MainScheduler.instance)
+            .debug("Before Skip ---->")
+            .skip(skipTime)
+            .asObservable()
+            .debug("Debounce --->")
+            .flatMap { offset in
+                self.isNearTheBottomEdge(contentOffset: offset, self.tableView)
+                    ? Observable.just(()) : Observable.empty() }
+            .bind(to: self.viewModel.getNextPageMovie)
+            .disposed(by: disposeBag)
+        
+        self.viewModel.movieList
+            .asObservable()
+            .subscribe(onNext: { _ in self.tableView.reloadData() })
+            .disposed(by: disposeBag)
+    }
+    func getIndexPath(start: Int, end: Int) -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
+        for index in start..<end {
+            indexPaths.append(IndexPath.init(row: index, section: 0))
+        }
+        return indexPaths
     }
 }
 
 extension AllMovieViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.movieList.movies?.count ?? 0
+        return viewModel.movieList.value.movies?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,8 +73,15 @@ extension AllMovieViewController: UITableViewDataSource, UITableViewDelegate {
             else {
                 return UITableViewCell()
         }
-        cell.configure(title: self.viewModel.movieList.movies?[indexPath.row].title ?? "No name",
-                       image: UIImage(named: "movie"))
+        guard let movie = self.viewModel.movieList.value.movies?[indexPath.row] else {
+            return cell
+        }
+        
+        let image = viewModel.getImage(path: movie.posterPath ?? "")
+        cell.configure(title: movie.title ?? "No name",
+                       image: image)
         return cell
     }
 }
+
+
