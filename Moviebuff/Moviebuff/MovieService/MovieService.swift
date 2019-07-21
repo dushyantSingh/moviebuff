@@ -77,6 +77,20 @@ class MovieService: MovieServiceType {
                 return UIImage.defaultPosterImage() }
         .startWith(UIImage.defaultPosterImage())
     }
+    
+    func retrieveLargePoster(path: String) -> Observable<UIImage> {
+        return self.provider.rx.request(.getLargePosterImage(path: path))
+            .asObservable()
+            .map { response in
+                if response.is2xx() {
+                    guard let image = try? response.mapImage() else {
+                        return UIImage.defaultPosterImage()
+                    }
+                    return image
+                }
+                return UIImage.defaultPosterImage() }
+            .startWith(UIImage.defaultPosterImage())
+    }
 }
 
 extension Response {

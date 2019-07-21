@@ -27,9 +27,11 @@ struct Movie: HandyJSON {
     var title: String?
     var posterPath: String?
     var overview: String?
+    var release_date: Date?
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<< posterPath <-- "poster_path"
+        mapper <<< release_date <-- DateTransform()
     }
 }
 
@@ -48,5 +50,6 @@ extension Movie: Equatable {
         && lhs.title == rhs.title
         && lhs.posterPath == rhs.posterPath
         && lhs.overview == rhs.overview
+        && lhs.release_date == rhs.release_date
     }
 }

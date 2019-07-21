@@ -9,6 +9,26 @@
 import RxSwift
 
 class SelectedMovieViewModel {
-    let events = PublishSubject<Void>()
+    let selectedMovie: Movie
+    let movieService: MovieService
     
+    let events = PublishSubject<Void>()
+    let posterImage = PublishSubject<UIImage>()
+   
+    private let disposeBag = DisposeBag()
+    
+    init(selectedMovie: Movie,
+         movieService: MovieService) {
+        self.selectedMovie = selectedMovie
+        self.movieService = movieService
+        setupPosterImage()
+    }
+    
+    func setupPosterImage() {
+        self.movieService
+            .retrieveLargePoster(path: selectedMovie.posterPath ?? "")
+            .bind(to: self.posterImage)
+        .disposed(by: disposeBag)
+        
+    }
 }

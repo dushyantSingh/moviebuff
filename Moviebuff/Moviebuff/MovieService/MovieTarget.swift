@@ -12,6 +12,7 @@ import RxSwift
 enum MovieTarget {
     case getListOfMovie(page: Int)
     case getPosterImage(path: String)
+    case getLargePosterImage(path: String)
 }
 
 extension MovieTarget: TargetType {
@@ -19,7 +20,7 @@ extension MovieTarget: TargetType {
         switch self {
         case .getListOfMovie:
             return Enviornment.manager.baseURL
-        case .getPosterImage:
+        case .getPosterImage, .getLargePosterImage:
             return Enviornment.manager.posterURL
         }
         
@@ -31,6 +32,8 @@ extension MovieTarget: TargetType {
              return "movie/popular"
         case .getPosterImage(let path):
             return "w185/\(path)"
+        case .getLargePosterImage(let path):
+            return "w342/\(path)"
         }
        
     }
@@ -43,7 +46,7 @@ extension MovieTarget: TargetType {
         switch self {
         case .getListOfMovie:
             return ResponseLoader.loadResponse(file: "MovieList")
-        case .getPosterImage:
+        case .getPosterImage, .getLargePosterImage:
             return UIImage(named: "DummyImage")!.pngData()!
         }
     }
@@ -54,7 +57,7 @@ extension MovieTarget: TargetType {
             return .requestParameters(parameters:["api_key": Enviornment.manager.apiKey,
                                                   "page": page],
                                       encoding: URLEncoding.queryString)
-        case .getPosterImage:
+        case .getPosterImage, .getLargePosterImage:
             return .requestPlain
         }
         

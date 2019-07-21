@@ -56,8 +56,10 @@ class MovieViewModelCoordinator {
         return allMovieViewModel.events
             .flatMap { event -> Observable<NavigationAction> in
                 switch event {
-                case .selectedMovie:
-                    let viewModel = SelectedMovieViewModel()
+                case .selectedMovie(let movie):
+                    let movieService = MovieService(provider: MoyaProvider<MovieTarget>())
+                    let viewModel = SelectedMovieViewModel(selectedMovie: movie,
+                                                           movieService: movieService)
                     return self.setup(selectedViewModel: viewModel)
                         .startWith(.push(viewModel: viewModel, animated: true))
                 }
