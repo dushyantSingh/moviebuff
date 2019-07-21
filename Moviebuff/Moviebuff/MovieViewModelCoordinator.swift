@@ -13,6 +13,7 @@ import Moya
 class MovieViewModelCoordinator {
     
     let navigationAction = PublishSubject<NavigationAction>()
+    var selectedMovie: Movie?
     private let disposeBag = DisposeBag()
     
    
@@ -57,11 +58,27 @@ class MovieViewModelCoordinator {
             .flatMap { event -> Observable<NavigationAction> in
                 switch event {
                 case .selectedMovie(let movie):
+                    self.selectedMovie = movie
+                    return Observable.empty()
+                
+                case .getReleatedMovies(.success(let movieList)):
                     let movieService = MovieService(provider: MoyaProvider<MovieTarget>())
+                    
+                    guard let movie = self.selectedMovie,
+                    let movies = movieList as? MovieListModel else { return Observable.empty() }
+                    
                     let viewModel = SelectedMovieViewModel(selectedMovie: movie,
+                                                           similarMovies: movies,
                                                            movieService: movieService)
+                    
                     return self.setup(selectedViewModel: viewModel)
                         .startWith(.push(viewModel: viewModel, animated: true))
+                
+                case .getReleatedMovies(.waiting):
+                    return Observable.empty()
+                
+                case .getReleatedMovies(.failed):
+                    return Observable.empty()
                 }
         }
     }

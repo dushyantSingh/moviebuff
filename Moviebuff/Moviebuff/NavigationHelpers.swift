@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 enum NavigationAction {
     case push(viewModel: Any, animated: Bool)
@@ -42,3 +43,33 @@ extension UIViewController {
         return contentOffset.y + tableView.frame.size.height + StartLoadingOffset > tableView.contentSize.height
     }
 }
+
+protocol NetworkingViewModel {
+    associatedtype EventType: MapToNetworkEvent
+    var events: PublishSubject<EventType> { get set }
+    var waitingForResponse: PublishSubject<Bool> { get set }
+    var disposeBag: DisposeBag { get }
+    
+    func setupNetworkingEvents()
+}
+extension NetworkingViewModel {
+    func setupNetworkingEvents() {
+        self.events
+            .map { $0.toNetworkEvent() }
+            .filterNil()
+            .map { event -> Bool in
+                switch event {
+                case .success(_):
+                    return false
+                case .failed:
+                    return false
+                case .waiting:
+                    return true
+                }
+            }
+            .debug("Waiting")
+            .bind(to: self.waitingForResponse)
+            .disposed(by: disposeBag)
+    }
+}
+
