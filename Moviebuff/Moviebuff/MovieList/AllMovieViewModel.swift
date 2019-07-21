@@ -12,8 +12,19 @@ import RxCocoa
 
 import Moya
 
-enum AllMovieViewModelEvents {
+enum AllMovieViewModelEvents: MapToNetworkEvent {
     case selectedMovie(movie: Movie)
+    case getReleatedMovies(NetworkingEvent)
+}
+
+extension AllMovieViewModelEvents {
+    func toNetworkEvent() -> NetworkingEvent? {
+        if case let .getReleatedMovies(event) = self {
+            return event
+        } else {
+            return nil
+        }
+    }
 }
 
 extension AllMovieViewModelEvents: Equatable {
@@ -21,22 +32,29 @@ extension AllMovieViewModelEvents: Equatable {
         switch (lhs, rhs) {
         case (.selectedMovie(let A), .selectedMovie(let B)):
             return A == B
+        default: return false
         }
     }
 }
 
-class AllMovieViewModel {
+protocol MapToNetworkEvent {
+    func toNetworkEvent() -> NetworkingEvent?
+}
+
+class AllMovieViewModel: NetworkingViewModel {
+    typealias EventType = AllMovieViewModelEvents
     
     var movieList: BehaviorRelay<MovieListModel>
     var movieService: MovieService
     
-    let selectedMovie = PublishSubject<Movie>()
-    let getNextPageMovie = PublishSubject<Void>()
-    let events = PublishSubject<AllMovieViewModelEvents>()
-    
-    private let disposeBag = DisposeBag()
     var currentPage = 1
     private var maxPages = 0
+    
+    let selectedMovie = PublishSubject<Movie>()
+    let getNextPageMovie = PublishSubject<Void>()
+    var events = PublishSubject<AllMovieViewModelEvents>()
+    var waitingForResponse = PublishSubject<Bool>()
+    var disposeBag = DisposeBag()
     
     init(movieList: MovieListModel,
          service: MovieService) {
@@ -45,13 +63,22 @@ class AllMovieViewModel {
         self.movieService = service
         setupSelectedMovie()
         setupNextPageMovie()
+        setupNetworkingEvents()
     }
     
     private func setupSelectedMovie() {
         selectedMovie.asObservable()
             .map { AllMovieViewModelEvents.selectedMovie(movie: $0) }
-        .bind(to: events)
-        .disposed(by: disposeBag)
+            .bind(to: events)
+            .disposed(by: disposeBag)
+        
+        selectedMovie.asObservable()
+            .filter { $0.id != nil }
+            .flatMap { movie in
+                self.movieService.retrieveSimilarMovieList(movieID: movie.id!) }
+            .map { AllMovieViewModelEvents.getReleatedMovies($0) }
+            .bind(to: self.events)
+            .disposed(by: disposeBag)
     }
     
     private func setupNextPageMovie() {

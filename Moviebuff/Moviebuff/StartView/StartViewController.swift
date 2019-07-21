@@ -23,14 +23,28 @@ class StartViewController: UIViewController, ViewControllerProtocol {
     
     private let disposeBag = DisposeBag()
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var startButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = viewModel.title
         setupStart()
+        setupNetworkingEvent()
     }
     
+    private func setupNetworkingEvent() {
+        viewModel.waitingForResponse
+            .asObservable()
+            .map { !$0 }
+            .bind(to: startButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.waitingForResponse
+            .asObservable()
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+    }
     private func setupStart() {
         startButton.rx.tap
             .bind(to: viewModel.startButtonTapped)

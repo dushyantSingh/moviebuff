@@ -16,13 +16,34 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
     var viewModel: AllMovieViewModel!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    private let disposeBag = DisposeBag()
+
     var skipTime = 1
+    var activityIndicator = UIActivityIndicatorView()
+    var activityBarButton = UIBarButtonItem()
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        setupActivityIndicator()
+        setupNetworkingEvent()
+    }
+    
+    private func setupNetworkingEvent() {
+        viewModel.waitingForResponse
+            .asObservable()
+            .debug("Loading")
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.sizeToFit()
+        activityIndicator.color = self.view.tintColor
+        activityBarButton = UIBarButtonItem.init(customView: activityIndicator)
+        self.navigationItem.setRightBarButton(activityBarButton, animated: true)
+        activityIndicator.hidesWhenStopped = true
     }
     
     private func setupTableView() {
@@ -54,6 +75,7 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
             .subscribe(onNext: { _ in self.tableView.reloadData() })
             .disposed(by: disposeBag)
     }
+    
     func getIndexPath(start: Int, end: Int) -> [IndexPath] {
         var indexPaths: [IndexPath] = []
         for index in start..<end {

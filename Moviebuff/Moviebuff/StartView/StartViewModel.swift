@@ -10,8 +10,17 @@ import Foundation
 import RxSwift
 import Moya
 
-enum StartViewModelEvents {
+enum StartViewModelEvents: MapToNetworkEvent {
     case startLoadingMovies(NetworkingEvent)
+}
+extension StartViewModelEvents {
+    func toNetworkEvent() -> NetworkingEvent? {
+        if case let .startLoadingMovies(event) = self {
+            return event
+        } else {
+            return nil
+        }
+    }
 }
 
 extension StartViewModelEvents: Equatable {
@@ -29,18 +38,21 @@ extension StartViewModelEvents: Equatable {
     }
 }
 
-class StartViewModel {
+class StartViewModel: NetworkingViewModel {
+    typealias EventType = StartViewModelEvents
+    
     var title: String
     let movieService: MovieService
     
     let startButtonTapped = PublishSubject<Void>()
-    let events = PublishSubject<StartViewModelEvents>()
+    var events = PublishSubject<StartViewModelEvents>()
+    var waitingForResponse = PublishSubject<Bool>()
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     init(movieService: MovieService) {
         self.title = "MovieBuff"
         self.movieService = movieService
-        
+        setupNetworkingEvents()
         setupStart()
     }
     
