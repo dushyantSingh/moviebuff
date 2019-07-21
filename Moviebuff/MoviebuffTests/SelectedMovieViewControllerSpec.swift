@@ -22,6 +22,7 @@ class SelectedMovieViewControllerSpec: QuickSpec {
                 subject = UIViewController.make(viewController: SelectedMovieViewController.self)
                 fakeProvider = FakeMoyaProvider<MovieTarget>()
                 viewModel = SelectedMovieViewModel(selectedMovie: MovieListModelFactory.movieA,
+                                                   similarMovies: MovieListModelFactory.movieList,
                                                    movieService: MovieService(provider: fakeProvider))
                 subject.viewModel = viewModel
                 _ = subject.view
@@ -44,7 +45,36 @@ class SelectedMovieViewControllerSpec: QuickSpec {
                     expect(subject.moviePosterImageView.image?.pngData()).to(equal(UIImage(named: "movie")?.pngData()))
                     expect(subject.moviePosterImageView.isHidden).to(beFalse())
                 }
-                
+                it("should show similar movie title") {
+                    expect(subject.similarMoviesLabel.text).to(equal("Similar Movies"))
+                }
+                it("should show similar movies") {
+                    expect(subject.collectionView.numberOfItems(inSection: 0)).to(equal(2))
+                }
+                it("should show image in collection cell") {
+                    _ = subject.collectionView.visibleCells
+                    let cell = subject.collectionView(subject.collectionView,
+                                                      cellForItemAt: IndexPath(row: 0, section: 0)) as! MovieCollectionCell
+                    expect(cell.movieImageView.image?.pngData()).to(equal(UIImage(named: "movie")?.pngData()))
+                }
+                context("when no similar movies") {
+                    beforeEach {
+                        var noSimilarMovies = MovieListModelFactory.movieList
+                        noSimilarMovies.movies = nil
+                        viewModel = SelectedMovieViewModel(selectedMovie: MovieListModelFactory.movieA,
+                                                           similarMovies: noSimilarMovies,
+                                                           movieService: MovieService(provider: fakeProvider))
+                        subject.viewModel = viewModel
+                        subject.viewDidLoad()
+                        _ = subject.view
+                    }
+                    it("should show similar movie title") {
+                        expect(subject.similarMoviesLabel.isHidden).to(beTrue())
+                    }
+                    it("should show similar movies") {
+                        expect(subject.collectionView.numberOfItems(inSection: 0)).to(equal(0))
+                    }
+                }
             }
         }
     }

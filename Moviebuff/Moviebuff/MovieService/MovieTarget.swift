@@ -13,12 +13,13 @@ enum MovieTarget {
     case getListOfMovie(page: Int)
     case getPosterImage(path: String)
     case getLargePosterImage(path: String)
+    case getSimilarMovie(movieId: Int)
 }
 
 extension MovieTarget: TargetType {
     var baseURL: URL {
         switch self {
-        case .getListOfMovie:
+        case .getListOfMovie, .getSimilarMovie:
             return Enviornment.manager.baseURL
         case .getPosterImage, .getLargePosterImage:
             return Enviornment.manager.posterURL
@@ -30,6 +31,8 @@ extension MovieTarget: TargetType {
         switch self {
         case .getListOfMovie:
              return "movie/popular"
+        case .getSimilarMovie(let movieId):
+            return "movie/\(movieId)/similar"
         case .getPosterImage(let path):
             return "w185/\(path)"
         case .getLargePosterImage(let path):
@@ -44,7 +47,7 @@ extension MovieTarget: TargetType {
     
     var sampleData: Data {
         switch self {
-        case .getListOfMovie:
+        case .getListOfMovie, .getSimilarMovie:
             return ResponseLoader.loadResponse(file: "MovieList")
         case .getPosterImage, .getLargePosterImage:
             return UIImage(named: "DummyImage")!.pngData()!
@@ -56,6 +59,9 @@ extension MovieTarget: TargetType {
         case .getListOfMovie(let page):
             return .requestParameters(parameters:["api_key": Enviornment.manager.apiKey,
                                                   "page": page],
+                                      encoding: URLEncoding.queryString)
+        case .getSimilarMovie:
+            return .requestParameters(parameters:["api_key": Enviornment.manager.apiKey],
                                       encoding: URLEncoding.queryString)
         case .getPosterImage, .getLargePosterImage:
             return .requestPlain

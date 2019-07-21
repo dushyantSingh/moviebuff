@@ -91,6 +91,27 @@ class MovieService: MovieServiceType {
                 return UIImage.defaultPosterImage() }
             .startWith(UIImage.defaultPosterImage())
     }
+    
+    func retrieveSimilarMovieList(movieID: Int) -> Observable<NetworkingEvent> {
+        return self.provider.rx
+            .request(.getSimilarMovie(movieId: movieID))
+            .asObservable()
+            .map { response in
+                if response.is2xx() {
+                    if let responseString = String(data: response.data,
+                                                   encoding: String.Encoding.utf8) {
+                        guard let movieList = MovieListModel.deserialize(from: responseString) else {
+                            return .failed
+                        }
+                        return .success(movieList)
+                    } else {
+                        return .failed
+                    }
+                } else {
+                    return .failed
+                }
+            }.startWith(.waiting)
+    }
 }
 
 extension Response {

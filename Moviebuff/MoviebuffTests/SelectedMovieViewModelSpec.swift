@@ -17,13 +17,13 @@ class SelectedMovieViewModelSpec: QuickSpec {
         describe("SelectedMovieViewModel") {
             var subject: SelectedMovieViewModel!
             var fakeProvider: FakeMoyaProvider<MovieTarget>!
-            var movie: Movie!
             var disposeBag: DisposeBag!
             beforeEach {
                 fakeProvider = FakeMoyaProvider<MovieTarget>()
                 disposeBag = DisposeBag()
                 
                 subject = SelectedMovieViewModel(selectedMovie: MovieListModelFactory.movieA,
+                                                 similarMovies: MovieListModelFactory.movieList,
                                                  movieService: MovieService(provider: fakeProvider))
             }
             context("when view setups") {
