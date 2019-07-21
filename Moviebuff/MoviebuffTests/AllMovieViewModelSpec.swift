@@ -34,8 +34,16 @@ class AllMovieViewModelSpec: QuickSpec {
                         .disposed(by: disposeBag)
                     subject.selectedMovie.onNext(MovieListModelFactory.movieA)
                 }
-                it("should emit selected movie event") {
-                    expect(latestEvent).to(equal(AllMovieViewModelEvents.selectedMovie(movie: MovieListModelFactory.movieA)))
+                it("should emit get releated movie event") {
+                    expect(latestEvent).to(equal(.getReleatedMovies(.waiting)))
+                }
+                it("should emit success event") {
+                    fakeProvider.responseStatusCode.onNext(200)
+                    expect(latestEvent).to(equal(.getReleatedMovies(.success("Any"))))
+                }
+                it("should emit failed event") {
+                    fakeProvider.responseStatusCode.onNext(500)
+                    expect(latestEvent).to(equal(.getReleatedMovies(.failed)))
                 }
             }
             context("when page reload is called") {

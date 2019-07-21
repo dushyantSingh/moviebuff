@@ -33,7 +33,6 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
     private func setupNetworkingEvent() {
         viewModel.waitingForResponse
             .asObservable()
-            .debug("Loading")
             .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
     }
@@ -60,10 +59,8 @@ class AllMovieViewController: UIViewController, ViewControllerProtocol {
         
         self.tableView.rx.contentOffset
             .debounce(1, scheduler: MainScheduler.instance)
-            .debug("Before Skip ---->")
             .skip(skipTime)
             .asObservable()
-            .debug("Debounce --->")
             .flatMap { offset in
                 self.isNearTheBottomEdge(contentOffset: offset, self.tableView)
                     ? Observable.just(()) : Observable.empty() }

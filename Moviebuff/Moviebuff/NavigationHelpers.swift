@@ -67,7 +67,6 @@ extension NetworkingViewModel {
                     return true
                 }
             }
-            .debug("Waiting")
             .bind(to: self.waitingForResponse)
             .disposed(by: disposeBag)
     }

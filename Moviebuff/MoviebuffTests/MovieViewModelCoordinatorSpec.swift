@@ -49,20 +49,24 @@ class MovieViewModelCoordinatorSpec: QuickSpec {
                 beforeEach {
                     viewModel = AllMovieViewModel(movieList: MovieListModelFactory.movieList,
                                                   service: MovieService(provider: MoyaProvider<MovieTarget>()))
-                   navigationalEvents = subject.setup(allMovieViewModel: viewModel)
+                    navigationalEvents = subject.setup(allMovieViewModel: viewModel)
                 }
                 context("when movie is selected") {
                     var navigationAction: NavigationAction!
                     beforeEach {
                         navigationalEvents
                             .subscribe(onNext:{
-                                navigationAction = $0
-                            })
+                                navigationAction = $0 })
                             .disposed(by: disposeBag)
+                        
                         viewModel.events.onNext(.selectedMovie(movie: MovieListModelFactory.movieA))
                     }
+                    it("should save selected movie") {
+                        expect(subject.selectedMovie).to(equal(MovieListModelFactory.movieA))
+                    }
                     it("should push selected movie view model") {
-                        expect(navigationAction).to(equal(NavigationAction.push(viewModel: "Any model", animated: true)))
+                        viewModel.events.onNext(.getReleatedMovies(.success(MovieListModelFactory.movieList)))
+                        expect(navigationAction).to(equal(NavigationAction.push(viewModel: "Any", animated: true)))
                     }
                 }
             }

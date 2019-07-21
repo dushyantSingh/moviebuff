@@ -32,6 +32,8 @@ extension AllMovieViewModelEvents: Equatable {
         switch (lhs, rhs) {
         case (.selectedMovie(let A), .selectedMovie(let B)):
             return A == B
+        case (.getReleatedMovies(let A), .getReleatedMovies(let B)):
+            return A == B
         default: return false
         }
     }
