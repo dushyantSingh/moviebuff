@@ -34,6 +34,8 @@ class StartViewControllerSpec : QuickSpec {
                 }
                 it("should have a start button") {
                     expect(subject.startButton.isHidden).to(beFalse())
+                    expect(subject.startButton.isEnabled).to(beTrue())
+                    expect(subject.activityIndicator.isAnimating).to(beFalse())
                     expect(subject.startButton.titleLabel?.text).to(equal("Start"))
                 }
             }
@@ -46,6 +48,28 @@ class StartViewControllerSpec : QuickSpec {
                         .disposed(by: disposeBag)
                     subject.startButton.sendActions(for: .touchUpInside)
                     expect(startButtonClicked).to(beTrue())
+                }
+            }
+            context("when waiting for response is triggered with true") {
+                beforeEach {
+                    subject.viewModel.waitingForResponse.onNext(true)
+                }
+                it("should disable start button") {
+                    expect(subject.startButton.isEnabled).to(beFalse())
+                }
+                it("should start animating the activity indicator") {
+                    expect(subject.activityIndicator.isAnimating).to(beTrue())
+                }
+            }
+            context("when waiting for response is triggered with false") {
+                beforeEach {
+                    subject.viewModel.waitingForResponse.onNext(false)
+                }
+                it("should disable start button") {
+                    expect(subject.startButton.isEnabled).to(beTrue())
+                }
+                it("should start animating the activity indicator") {
+                    expect(subject.activityIndicator.isAnimating).to(beFalse())
                 }
             }
         }

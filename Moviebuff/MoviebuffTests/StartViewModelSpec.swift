@@ -28,7 +28,14 @@ class StartViewModelSpec: QuickSpec {
             
             context("when startButtonTapped triggered") {
                 var latestEvent: StartViewModelEvents!
+                var waitingIndicatorCalled: Bool!
                 beforeEach {
+                    waitingIndicatorCalled = false
+                    subject.waitingForResponse
+                        .asObservable()
+                        .subscribe(onNext: { waitingIndicatorCalled = $0 })
+                        .disposed(by: disposeBag)
+                    
                     subject.events
                         .asObservable()
                         .subscribe(onNext: { latestEvent = $0 })
@@ -36,15 +43,18 @@ class StartViewModelSpec: QuickSpec {
                     subject.startButtonTapped.onNext(())
                 }
                 it("should emit waiting event") {
-                    expect(latestEvent).to(equal(StartViewModelEvents.startLoadingMovies(.waiting)))
+                    expect(waitingIndicatorCalled).to(beTrue())
+                    expect(latestEvent).to(equal(.startLoadingMovies(.waiting)))
                 }
                 it("should emit success event") {
                     fakeProvider.responseStatusCode.onNext(200)
-                    expect(latestEvent).to(equal(StartViewModelEvents.startLoadingMovies(.success("Any"))))
+                    expect(waitingIndicatorCalled).to(beFalse())
+                    expect(latestEvent).to(equal(.startLoadingMovies(.success("Any"))))
                 }
                 it("should emit failed event") {
                     fakeProvider.responseStatusCode.onNext(500)
-                    expect(latestEvent).to(equal(StartViewModelEvents.startLoadingMovies(.failed)))
+                    expect(waitingIndicatorCalled).to(beFalse())
+                    expect(latestEvent).to(equal(.startLoadingMovies(.failed)))
                 }
             }
         }

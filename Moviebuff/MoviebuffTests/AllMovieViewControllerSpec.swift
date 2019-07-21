@@ -125,6 +125,22 @@ class AllMovieViewControllerSpec: QuickSpec {
                     expect(selectedMovie).to(equal(MovieListModelFactory.movieA))
                 }
             }
+            context("when waiting for response is triggered with true") {
+                beforeEach {
+                    subject.viewModel.waitingForResponse.onNext(true)
+                }
+                it("should start animating the activity indicator") {
+                    expect(subject.activityIndicator.isAnimating).to(beTrue())
+                }
+            }
+            context("when waiting for response is triggered with false") {
+                beforeEach {
+                    subject.viewModel.waitingForResponse.onNext(false)
+                }
+                it("should start animating the activity indicator") {
+                    expect(subject.activityIndicator.isAnimating).to(beFalse())
+                }
+            }
         }
     }
 }

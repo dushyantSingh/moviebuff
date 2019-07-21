@@ -27,7 +27,15 @@ class AllMovieViewModelSpec: QuickSpec {
             }
             context("when movie is selected") {
                 var latestEvent: AllMovieViewModelEvents!
+                var waitingResponseCalled: Bool!
                 beforeEach {
+                    waitingResponseCalled = false
+                    
+                    subject.waitingForResponse
+                        .asObservable()
+                        .subscribe(onNext: { waitingResponseCalled = $0 })
+                        .disposed(by: disposeBag)
+                    
                     subject.events
                         .asObservable()
                         .subscribe(onNext: { latestEvent = $0 })
@@ -35,14 +43,17 @@ class AllMovieViewModelSpec: QuickSpec {
                     subject.selectedMovie.onNext(MovieListModelFactory.movieA)
                 }
                 it("should emit get releated movie event") {
+                    expect(waitingResponseCalled).to(beTrue())
                     expect(latestEvent).to(equal(.getReleatedMovies(.waiting)))
                 }
                 it("should emit success event") {
                     fakeProvider.responseStatusCode.onNext(200)
+                    expect(waitingResponseCalled).to(beFalse())
                     expect(latestEvent).to(equal(.getReleatedMovies(.success("Any"))))
                 }
                 it("should emit failed event") {
                     fakeProvider.responseStatusCode.onNext(500)
+                    expect(waitingResponseCalled).to(beFalse())
                     expect(latestEvent).to(equal(.getReleatedMovies(.failed)))
                 }
             }
