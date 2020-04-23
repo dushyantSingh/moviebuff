@@ -30,7 +30,7 @@ extension MovieTarget: TargetType {
     var path: String {
         switch self {
         case .getListOfMovie:
-             return "movie/popular"
+            return "movie/popular"
         case .getSimilarMovie(let movieId):
             return "movie/\(movieId)/similar"
         case .getPosterImage(let path):
@@ -38,7 +38,7 @@ extension MovieTarget: TargetType {
         case .getLargePosterImage(let path):
             return "w342/\(path)"
         }
-       
+        
     }
     
     var method: Moya.Method {
@@ -86,5 +86,5 @@ class Enviornment {
         return URL(string: "https://image.tmdb.org/t/p/")!
     }
     
-    let apiKey = "48d3884bb23652fb744387b847d49137"
+    let apiKey = "Api Key"
 }
