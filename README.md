@@ -1,5 +1,5 @@
 # Moviebuff
-Moviebuff applications shows the list of movies from [TMDB].(https://www.themoviedb.org/)
+Moviebuff application shows the list of movies from [TMDB](https://www.themoviedb.org/).
 
 ## Architecture: MVVM
 Moviebuff uses MVVM architecture along with Rxswift to demostrate how MVVM and observables compliments each other.
